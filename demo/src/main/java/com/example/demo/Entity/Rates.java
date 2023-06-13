@@ -29,4 +29,12 @@ public class Rates {
     private int Cur_Scale;
 
 
+    public Rates(int cur_ID, String cur_Name, double cur_OfficialRate, String cur_Abbreviation, java.sql.Date date, int cur_Scale) {
+        Cur_ID = cur_ID;
+        Cur_Name = cur_Name;
+        Cur_OfficialRate = cur_OfficialRate;
+        Cur_Abbreviation = cur_Abbreviation;
+        Date = date;
+        Cur_Scale = cur_Scale;
+    }
 }

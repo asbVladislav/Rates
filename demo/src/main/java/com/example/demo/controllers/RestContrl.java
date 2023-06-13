@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 
+import com.example.demo.Configure.ProxyConfig;
 import com.example.demo.Entity.Dto.CurrencyDto;
 import com.example.demo.Entity.Rates;
 import com.example.demo.Entity.Dto.RatesDto;
@@ -14,12 +15,15 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 @Controller
 @ResponseBody
@@ -72,13 +76,10 @@ public String getJson( )
 
 
         JSONArray json = null;
-        try {
             getJson getJson=new getGooglecodeJsonSimple();
             // json = (PojoJson) getJson.getJsonsArray( new URL("https://api.nbrb.by/exrates/rates?periodicity=0"));
-            json = (JSONArray) getJson.getJsonsArray( new URL( "https://api.nbrb.by/exrates/rates?periodicity=0"));
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
+            json = (JSONArray) getJson.getJsonsArray(  "https://api.nbrb.by/exrates/rates?periodicity=0");
+
 
 
              for (int i=0;i< json.size();i++)
@@ -86,8 +87,8 @@ public String getJson( )
                  JSONObject jsonObject= (JSONObject) json.get(i);
                  System.out.print((String) jsonObject.get("Date"));
                  System.out.println( jsonObject.get("Date").getClass());
-                 Rates exchangeRates= new Rates(Long.valueOf((Long) jsonObject.get("Cur_ID")).intValue(), (String) jsonObject.get("Cur_Name"), (double) jsonObject.get("Cur_OfficialRate"), (String) jsonObject.get("Cur_Abbreviation"), Long.valueOf((Long) jsonObject.get("Cur_Scale")).intValue());
-                 RatesRepository.save(exchangeRates);
+               //  Rates exchangeRates= new Rates(Long.valueOf((Long) jsonObject.get("Cur_ID")).intValue(), (String) jsonObject.get("Cur_Name"), (double) jsonObject.get("Cur_OfficialRate"), (String) jsonObject.get("Cur_Abbreviation"), Long.valueOf((Long) jsonObject.get("Cur_Scale")).intValue());
+                // RatesRepository.save(exchangeRates);
              }
 
 
@@ -98,17 +99,15 @@ public String getJson( )
     @RequestMapping("/mas2")
     public String getData2() {
 
-
         ArrayList<RatesDto> jsons;
-        try {
-            getJson getJson=new getJackson();
-            jsons =  getJson.getJsonsArray( new URL("https://api.nbrb.by/exrates/rates?periodicity=0"));// вынести в проперти
+        getJson getJson = new getJackson();
+        jsons = getJson.getJsonsArray("https://api.nbrb.by/exrates/rates?periodicity=0");// вынести в проперти
 
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
 
-addInBd DataBase=new addInBd(RatesRepository);
+
+
+
+        addInBd DataBase=new addInBd(RatesRepository);
         DataBase.AddJsonsArrayInBD(jsons);
 
 
@@ -137,5 +136,19 @@ System.out.println(jsons);
 
 
         return "poka chto nichego, no s jackson i currency";
+    }
+
+    @RequestMapping("/mas4")
+    public String getData4() {
+
+
+
+getJson getJson=new GetJacksonRestTemplate();
+System.out.println(getJson.getJsonsArray("https://api.nbrb.by/exrates/rates?periodicity=0"));
+
+
+
+
+        return "poka chto nichego, no s jackson";
     }
 }

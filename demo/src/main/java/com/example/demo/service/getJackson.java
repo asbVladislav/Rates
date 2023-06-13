@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class getJackson implements getJson {
     @Override
-    public ArrayList<RatesDto> getJsonsArray(URL url) {
+    public ArrayList<RatesDto> getJsonsArray(String url) {
 
         ObjectMapper objectMapper=new ObjectMapper();
         ArrayList<RatesDto> JsonArray;

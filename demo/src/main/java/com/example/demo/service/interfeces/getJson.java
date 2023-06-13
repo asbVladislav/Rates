@@ -6,5 +6,5 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public interface getJson {
-    public ArrayList<RatesDto> getJsonsArray(URL url);
+    public ArrayList<RatesDto> getJsonsArray(String url);
 }
