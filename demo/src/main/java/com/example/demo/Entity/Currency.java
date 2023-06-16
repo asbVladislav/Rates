@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +16,10 @@ import java.sql.Date;
 public class Currency {
 
 
-    @Id
     @Column(name = "Cur_ID", nullable = false)
+    @Id
     private int Cur_ID;
+
     private int Cur_ParentID;
     private int Cur_Code;
     private String Cur_Abbreviation;
@@ -34,6 +36,10 @@ public class Currency {
     private int Cur_Periodicity;
     private Date Cur_DateStart;
     private Date Cur_DateEnd;
+
+//    @Column(name = "Cur_ID", nullable = false)
+//    @OneToMany
+//    private List<Rates> Cur_ID_Rate;
 
 
 

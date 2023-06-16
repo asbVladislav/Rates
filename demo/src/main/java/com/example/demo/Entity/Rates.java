@@ -9,7 +9,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.sql.Date;
 
-@AllArgsConstructor
+
 @NoArgsConstructor
 @ToString
 @Getter
@@ -20,7 +20,11 @@ public class Rates {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private int ID;
+
+
+
     @Column(name = "Cur_ID", nullable = false)
+    //@ManyToOne
     private int Cur_ID;
     private String Cur_Name;
     private double Cur_OfficialRate;
@@ -28,6 +32,11 @@ public class Rates {
     private Date Date;
     private int Cur_Scale;
 
+//    public Rates getFirstResponse(Rates requestRate) {
+//        Rates responseRate=new Rates();
+//        responseRate.setCur_ID(requestRate.getCur_ID());
+//        return responseRate;
+//    }
 
     public Rates(int cur_ID, String cur_Name, double cur_OfficialRate, String cur_Abbreviation, java.sql.Date date, int cur_Scale) {
         Cur_ID = cur_ID;

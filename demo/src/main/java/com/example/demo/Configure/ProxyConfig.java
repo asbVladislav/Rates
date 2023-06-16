@@ -13,8 +13,8 @@ public class ProxyConfig {
     public RestTemplate restTemplate() {
         SimpleClientHttpRequestFactory requestFactory = new SimpleClientHttpRequestFactory();
 
-        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy.bb.asb", 3128));
-        requestFactory.setProxy(proxy);
+//        Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("proxy.bb.asb", 3128));
+//        requestFactory.setProxy(proxy);
 
         return new RestTemplate(requestFactory);
     }
