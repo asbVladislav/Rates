@@ -1,11 +1,13 @@
 package com.example.demo.Entity.Sends;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
 
+@Schema(description = "полные данные")
 @NoArgsConstructor
 @ToString
 @Getter

@@ -4,6 +4,9 @@ import com.example.demo.Entity.Sends.SendAll;
 import com.example.demo.Entity.Sends.SendNameRateScaleAbbrev;
 import com.example.demo.Entity.Sends.SendNameRateScaleAbbrevDate;
 import com.example.demo.Service.getByUrl.GetTest;
+
+
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,9 +31,11 @@ public class HtmlController {
 
     @GetMapping("/")
     public String newprod(@RequestParam( required = false,defaultValue = "start") String Type) {
-        if(Type.equals("period") ) return "MainPAgePeriod";
+        if(Type.equals("period") ) return "MainPage/Period";
         else return "MainPage/Date";
     }
+
+
 
     @PostMapping("/generateUrl")
     public String createCredit(@RequestParam String infType,@RequestParam(required = false ,defaultValue = "-1") String startDate,@RequestParam(required = false ,defaultValue = "-1") String endDate,@RequestParam(required = false ,defaultValue = "-1") String date, Model model) {
